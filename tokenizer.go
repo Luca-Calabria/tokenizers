@@ -92,6 +92,7 @@ func FromFile(path string) (*Tokenizer, error) {
 	defer C.free(unsafe.Pointer(cPath))
 	tokenizer, err := C.from_file(cPath)
 	if err != nil {
+		fmt.Println("Tokenizers:tokenizer:FromFile - C.from_file return error")
 		return nil, err
 	}
 	return &Tokenizer{tokenizer: tokenizer}, nil
