@@ -187,8 +187,9 @@ func FromPretrained(modelID string, opts ...TokenizerConfigOption) (*Tokenizer, 
 		}
 		return nil, errs[0]
 	}
-
-	return FromFile(filepath.Join(downloadDir, "tokenizer.json"))
+	tokenizer_path := filepath.Join(downloadDir, "tokenizer.json")
+	fmt.Println("Tokenizers:tokenizer:FromPretrained - tokenizer_path= ", tokenizer_path)
+	return FromFile(tokenizer_path)
 }
 
 // downloadFile downloads a file from the given URL and saves it to the specified destination.
