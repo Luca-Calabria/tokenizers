@@ -89,6 +89,7 @@ func FromBytesWithTruncation(data []byte, maxLen uint32, dir TruncationDirection
 
 func FromFile(path string) (*Tokenizer, error) {
 	cPath := C.CString(path)
+	fmt.Println("Tokenizers:tokenizer:FromFile - cPath= ", cPath)
 	defer C.free(unsafe.Pointer(cPath))
 	tokenizer, err := C.from_file(cPath)
 	if err != nil {
