@@ -92,10 +92,10 @@ func FromFile(path string) (*Tokenizer, error) {
 	fmt.Println("Tokenizers:tokenizer:FromFile - cPath= ", cPath)
 	defer C.free(unsafe.Pointer(cPath))
 	fmt.Println("Tokenizers:tokenizer:FromFile - After C.free - cPath= ", cPath)
-	tokenizer, err := C.from_file(cPath)
-	if err != nil {
-		fmt.Println("Tokenizers:tokenizer:FromFile - C.from_file return error")
-		return nil, err
+	tokenizer := C.from_file(cPath)
+	if tokenizer == nil {
+		fmt.Println("Tokenizers:tokenizer:FromFile - C.from_file returned nil")
+		return nil, fmt.Errorf("failed to load tokenizer from file: %s", path)
 	}
 	return &Tokenizer{tokenizer: tokenizer}, nil
 }
